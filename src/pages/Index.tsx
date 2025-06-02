@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -61,34 +60,37 @@ const Index = () => {
   ];
 
   return (
-    <div className={`min-h-screen ${darkMode ? 'dark' : ''}`}>
+    <div className={`min-h-screen font-poppins ${darkMode ? 'dark' : ''}`}>
       <div className="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 transition-colors duration-500">
         {/* Header */}
-        <header className="container mx-auto px-8 py-6 border-b-2 border-blue-500">
-          <div className="flex justify-between items-center">
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="flex items-center space-x-2"
-            >
-              <Code2 className="h-8 w-8 text-blue-600 dark:text-blue-400" />
-              <span className="text-xl font-semibold text-slate-800 dark:text-white">Frontend Mastery</span>
-            </motion.div>
+        <header className="sticky top-0 z-50 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 backdrop-blur-md border-b-2 border-blue-500">
+          <div className="container mx-auto px-8 py-6">
+            <div className="flex justify-between items-center">
+              <motion.div 
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="flex items-center space-x-2"
+              >
+                <Code2 className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+                <span className="text-xl font-semibold text-slate-800 dark:text-white">Frontend Mastery</span>
+              </motion.div>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-8">
-              <div className="flex items-center space-x-6">
-                {components.map((component) => (
-                  <a
-                    key={component.name}
-                    href={component.href}
-                    className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
-                  >
-                    {component.name}
-                  </a>
-                ))}
-              </div>
-              <div className="flex items-center space-x-4">
+              {/* Desktop Navigation */}
+              <nav className="hidden lg:flex items-center justify-center flex-1">
+                <div className="flex items-center space-x-6">
+                  {components.map((component) => (
+                    <a
+                      key={component.name}
+                      href={component.href}
+                      className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
+                    >
+                      {component.name}
+                    </a>
+                  ))}
+                </div>
+              </nav>
+
+              <div className="hidden lg:flex items-center space-x-4">
                 <Button variant="outline" size="sm">
                   <LogIn className="h-4 w-4 mr-2" />
                   Login
@@ -110,63 +112,63 @@ const Index = () => {
                   )}
                 </motion.button>
               </div>
-            </nav>
 
-            {/* Mobile menu button */}
-            <div className="lg:hidden flex items-center space-x-4">
-              <motion.button
-                onClick={toggleDarkMode}
-                className="p-2 rounded-lg bg-white dark:bg-slate-800 shadow-md hover:shadow-lg transition-all duration-300"
-              >
-                {darkMode ? (
-                  <Sun className="h-5 w-5 text-yellow-500" />
-                ) : (
-                  <Moon className="h-5 w-5 text-slate-600" />
-                )}
-              </motion.button>
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 rounded-lg bg-white dark:bg-slate-800 shadow-md hover:shadow-lg transition-all duration-300"
-              >
-                {mobileMenuOpen ? (
-                  <X className="h-5 w-5 text-slate-600 dark:text-slate-300" />
-                ) : (
-                  <Menu className="h-5 w-5 text-slate-600 dark:text-slate-300" />
-                )}
-              </button>
-            </div>
-          </div>
-
-          {/* Mobile Navigation */}
-          {mobileMenuOpen && (
-            <motion.nav
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="lg:hidden mt-6 pb-6 border-t border-slate-200 dark:border-slate-700 pt-6"
-            >
-              <div className="flex flex-col space-y-4">
-                {components.map((component) => (
-                  <a
-                    key={component.name}
-                    href={component.href}
-                    className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 py-2"
-                  >
-                    {component.name}
-                  </a>
-                ))}
-                <div className="flex flex-col space-y-3 pt-4">
-                  <Button variant="outline" size="sm">
-                    <LogIn className="h-4 w-4 mr-2" />
-                    Login
-                  </Button>
-                  <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
-                    <UserPlus className="h-4 w-4 mr-2" />
-                    Sign Up
-                  </Button>
-                </div>
+              {/* Mobile menu button */}
+              <div className="lg:hidden flex items-center space-x-4">
+                <motion.button
+                  onClick={toggleDarkMode}
+                  className="p-2 rounded-lg bg-white dark:bg-slate-800 shadow-md hover:shadow-lg transition-all duration-300"
+                >
+                  {darkMode ? (
+                    <Sun className="h-5 w-5 text-yellow-500" />
+                  ) : (
+                    <Moon className="h-5 w-5 text-slate-600" />
+                  )}
+                </motion.button>
+                <button
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="p-2 rounded-lg bg-white dark:bg-slate-800 shadow-md hover:shadow-lg transition-all duration-300"
+                >
+                  {mobileMenuOpen ? (
+                    <X className="h-5 w-5 text-slate-600 dark:text-slate-300" />
+                  ) : (
+                    <Menu className="h-5 w-5 text-slate-600 dark:text-slate-300" />
+                  )}
+                </button>
               </div>
-            </motion.nav>
-          )}
+            </div>
+
+            {/* Mobile Navigation */}
+            {mobileMenuOpen && (
+              <motion.nav
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="lg:hidden mt-6 pb-6 border-t border-slate-200 dark:border-slate-700 pt-6"
+              >
+                <div className="flex flex-col space-y-4">
+                  {components.map((component) => (
+                    <a
+                      key={component.name}
+                      href={component.href}
+                      className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 py-2"
+                    >
+                      {component.name}
+                    </a>
+                  ))}
+                  <div className="flex flex-col space-y-3 pt-4">
+                    <Button variant="outline" size="sm">
+                      <LogIn className="h-4 w-4 mr-2" />
+                      Login
+                    </Button>
+                    <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
+                      <UserPlus className="h-4 w-4 mr-2" />
+                      Sign Up
+                    </Button>
+                  </div>
+                </div>
+              </motion.nav>
+            )}
+          </div>
         </header>
 
         {/* Hero Section */}
@@ -224,29 +226,32 @@ const Index = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <Card className="bg-white dark:bg-slate-800 shadow-2xl border-0 overflow-hidden rounded-2xl">
-                <CardContent className="p-8">
-                  <div className="bg-gradient-to-br from-slate-900 to-slate-700 rounded-lg p-6 text-green-400 font-mono text-sm">
-                    <div className="flex items-center space-x-2 mb-4">
-                      <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                      <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                      <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              <div className="relative">
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-2xl blur opacity-75"></div>
+                <Card className="relative bg-white dark:bg-slate-800 shadow-2xl border-0 overflow-hidden rounded-2xl">
+                  <CardContent className="p-8">
+                    <div className="bg-gradient-to-br from-slate-900 to-slate-700 rounded-lg p-6 text-green-400 font-mono text-sm">
+                      <div className="flex items-center space-x-2 mb-4">
+                        <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                        <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                        <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                      </div>
+                      <div className="space-y-2">
+                        <div>{'// CSS Flexbox Cheat'}</div>
+                        <div>{'display: flex;'}</div>
+                        <div>{'justify-content: center;'}</div>
+                        <div>{'align-items: center;'}</div>
+                        <div className="text-blue-400">{'/* Perfect centering! */'}</div>
+                      </div>
                     </div>
-                    <div className="space-y-2">
-                      <div>{'// CSS Flexbox Cheat'}</div>
-                      <div>{'display: flex;'}</div>
-                      <div>{'justify-content: center;'}</div>
-                      <div>{'align-items: center;'}</div>
-                      <div className="text-blue-400">{'/* Perfect centering! */'}</div>
+                    <div className="mt-6 space-y-3">
+                      <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded w-3/4"></div>
+                      <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded w-1/2"></div>
+                      <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded w-5/6"></div>
                     </div>
-                  </div>
-                  <div className="mt-6 space-y-3">
-                    <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded w-3/4"></div>
-                    <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded w-1/2"></div>
-                    <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded w-5/6"></div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </div>
             </motion.div>
           </div>
         </section>
