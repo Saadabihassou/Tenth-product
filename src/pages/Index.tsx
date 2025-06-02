@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -224,35 +223,29 @@ const Index = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <div className="relative">
-                {/* Animated gradient border */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 rounded-2xl blur opacity-75 animate-pulse"></div>
-                <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl animate-spin" style={{ animationDuration: '3s' }}></div>
-                
-                <Card className="relative bg-white dark:bg-slate-800 shadow-2xl border-0 overflow-hidden rounded-2xl">
-                  <CardContent className="p-8">
-                    <div className="bg-gradient-to-br from-slate-900 to-slate-700 rounded-lg p-6 text-green-400 font-mono text-sm">
-                      <div className="flex items-center space-x-2 mb-4">
-                        <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                        <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                        <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                      </div>
-                      <div className="space-y-2">
-                        <div>{'// CSS Flexbox Cheat'}</div>
-                        <div>{'display: flex;'}</div>
-                        <div>{'justify-content: center;'}</div>
-                        <div>{'align-items: center;'}</div>
-                        <div className="text-blue-400">{'/* Perfect centering! */'}</div>
-                      </div>
+              <Card className="bg-white dark:bg-slate-800 shadow-2xl border-0 overflow-hidden rounded-2xl">
+                <CardContent className="p-8">
+                  <div className="bg-gradient-to-br from-slate-900 to-slate-700 rounded-lg p-6 text-green-400 font-mono text-sm">
+                    <div className="flex items-center space-x-2 mb-4">
+                      <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                      <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                      <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                     </div>
-                    <div className="mt-6 space-y-3">
-                      <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded w-3/4"></div>
-                      <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded w-1/2"></div>
-                      <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded w-5/6"></div>
+                    <div className="space-y-2">
+                      <div>{'// CSS Flexbox Cheat'}</div>
+                      <div>{'display: flex;'}</div>
+                      <div>{'justify-content: center;'}</div>
+                      <div>{'align-items: center;'}</div>
+                      <div className="text-blue-400">{'/* Perfect centering! */'}</div>
                     </div>
-                  </CardContent>
-                </Card>
-              </div>
+                  </div>
+                  <div className="mt-6 space-y-3">
+                    <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded w-3/4"></div>
+                    <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded w-1/2"></div>
+                    <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded w-5/6"></div>
+                  </div>
+                </CardContent>
+              </Card>
             </motion.div>
           </div>
         </section>
@@ -295,11 +288,7 @@ const Index = () => {
               }
             ].map((feature, index) => (
               <motion.div key={index} variants={fadeInUp} className="relative">
-                {/* Animated gradient border */}
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 rounded-xl opacity-50 blur animate-pulse"></div>
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl animate-spin" style={{ animationDuration: '4s' }}></div>
-                
-                <Card className="relative h-full hover:shadow-xl transition-all duration-300 border-0 bg-white dark:bg-slate-800 rounded-xl">
+                <Card className="h-full hover:shadow-xl transition-all duration-300 border-0 bg-white dark:bg-slate-800 rounded-xl">
                   <CardContent className="p-8 text-center">
                     <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-2xl mb-6">
                       {feature.icon}
