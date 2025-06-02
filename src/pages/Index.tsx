@@ -5,12 +5,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Check, Code2, Zap, BookOpen, Star, Download, Mail, Moon, Sun } from 'lucide-react';
+import { Check, Code2, Zap, BookOpen, Star, Download, Mail, Moon, Sun, LogIn, UserPlus, Menu, X } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const Index = () => {
   const [email, setEmail] = useState('');
   const [darkMode, setDarkMode] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { toast } = useToast();
 
   const toggleDarkMode = () => {
@@ -51,35 +52,125 @@ const Index = () => {
     }
   };
 
+  const components = [
+    { name: 'HTML', href: '#html' },
+    { name: 'CSS', href: '#css' },
+    { name: 'JavaScript', href: '#javascript' },
+    { name: 'Tailwind', href: '#tailwind' },
+    { name: 'React', href: '#react' },
+  ];
+
   return (
     <div className={`min-h-screen ${darkMode ? 'dark' : ''}`}>
       <div className="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 transition-colors duration-500">
         {/* Header */}
-        <header className="container mx-auto px-4 py-6 flex justify-between items-center">
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="flex items-center space-x-2"
-          >
-            <Code2 className="h-8 w-8 text-blue-600 dark:text-blue-400" />
-            <span className="text-xl font-bold text-slate-800 dark:text-white">Frontend Mastery</span>
-          </motion.div>
-          <motion.button
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            onClick={toggleDarkMode}
-            className="p-2 rounded-lg bg-white dark:bg-slate-800 shadow-md hover:shadow-lg transition-all duration-300"
-          >
-            {darkMode ? (
-              <Sun className="h-5 w-5 text-yellow-500" />
-            ) : (
-              <Moon className="h-5 w-5 text-slate-600" />
-            )}
-          </motion.button>
+        <header className="container mx-auto px-8 py-6 border-b-2 border-blue-500">
+          <div className="flex justify-between items-center">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="flex items-center space-x-2"
+            >
+              <Code2 className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+              <span className="text-xl font-semibold text-slate-800 dark:text-white">Frontend Mastery</span>
+            </motion.div>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center space-x-8">
+              <div className="flex items-center space-x-6">
+                {components.map((component) => (
+                  <a
+                    key={component.name}
+                    href={component.href}
+                    className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
+                  >
+                    {component.name}
+                  </a>
+                ))}
+              </div>
+              <div className="flex items-center space-x-4">
+                <Button variant="outline" size="sm">
+                  <LogIn className="h-4 w-4 mr-2" />
+                  Login
+                </Button>
+                <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
+                  <UserPlus className="h-4 w-4 mr-2" />
+                  Sign Up
+                </Button>
+                <motion.button
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  onClick={toggleDarkMode}
+                  className="p-2 rounded-lg bg-white dark:bg-slate-800 shadow-md hover:shadow-lg transition-all duration-300"
+                >
+                  {darkMode ? (
+                    <Sun className="h-5 w-5 text-yellow-500" />
+                  ) : (
+                    <Moon className="h-5 w-5 text-slate-600" />
+                  )}
+                </motion.button>
+              </div>
+            </nav>
+
+            {/* Mobile menu button */}
+            <div className="lg:hidden flex items-center space-x-4">
+              <motion.button
+                onClick={toggleDarkMode}
+                className="p-2 rounded-lg bg-white dark:bg-slate-800 shadow-md hover:shadow-lg transition-all duration-300"
+              >
+                {darkMode ? (
+                  <Sun className="h-5 w-5 text-yellow-500" />
+                ) : (
+                  <Moon className="h-5 w-5 text-slate-600" />
+                )}
+              </motion.button>
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2 rounded-lg bg-white dark:bg-slate-800 shadow-md hover:shadow-lg transition-all duration-300"
+              >
+                {mobileMenuOpen ? (
+                  <X className="h-5 w-5 text-slate-600 dark:text-slate-300" />
+                ) : (
+                  <Menu className="h-5 w-5 text-slate-600 dark:text-slate-300" />
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile Navigation */}
+          {mobileMenuOpen && (
+            <motion.nav
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="lg:hidden mt-6 pb-6 border-t border-slate-200 dark:border-slate-700 pt-6"
+            >
+              <div className="flex flex-col space-y-4">
+                {components.map((component) => (
+                  <a
+                    key={component.name}
+                    href={component.href}
+                    className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 py-2"
+                  >
+                    {component.name}
+                  </a>
+                ))}
+                <div className="flex flex-col space-y-3 pt-4">
+                  <Button variant="outline" size="sm">
+                    <LogIn className="h-4 w-4 mr-2" />
+                    Login
+                  </Button>
+                  <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
+                    <UserPlus className="h-4 w-4 mr-2" />
+                    Sign Up
+                  </Button>
+                </div>
+              </div>
+            </motion.nav>
+          )}
         </header>
 
         {/* Hero Section */}
-        <section className="container mx-auto px-4 py-20">
+        <section className="container mx-auto px-8 py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div 
               className="space-y-8"
@@ -92,7 +183,7 @@ const Index = () => {
                 Digital Download • Instant Access
               </Badge>
               
-              <h1 className="text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white leading-tight">
+              <h1 className="text-5xl lg:text-6xl font-semibold text-slate-900 dark:text-white leading-tight">
                 Code Faster,{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
                   Smarter
@@ -134,8 +225,11 @@ const Index = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-2xl blur-3xl opacity-20"></div>
-                <Card className="relative bg-white dark:bg-slate-800 shadow-2xl border-0 overflow-hidden">
+                {/* Animated gradient border */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 rounded-2xl blur opacity-75 animate-pulse"></div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl animate-spin" style={{ animationDuration: '3s' }}></div>
+                
+                <Card className="relative bg-white dark:bg-slate-800 shadow-2xl border-0 overflow-hidden rounded-2xl">
                   <CardContent className="p-8">
                     <div className="bg-gradient-to-br from-slate-900 to-slate-700 rounded-lg p-6 text-green-400 font-mono text-sm">
                       <div className="flex items-center space-x-2 mb-4">
@@ -164,12 +258,12 @@ const Index = () => {
         </section>
 
         {/* Features Section */}
-        <section className="container mx-auto px-4 py-20">
+        <section className="container mx-auto px-8 py-20">
           <motion.div 
             className="text-center mb-16"
             {...fadeInUp}
           >
-            <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">
+            <h2 className="text-4xl font-semibold text-slate-900 dark:text-white mb-4">
               Everything You Need to Level Up
             </h2>
             <p className="text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
@@ -200,8 +294,12 @@ const Index = () => {
                 description: "Beautiful layouts and interactive examples that you can copy and customize"
               }
             ].map((feature, index) => (
-              <motion.div key={index} variants={fadeInUp}>
-                <Card className="h-full hover:shadow-xl transition-all duration-300 border-0 bg-white dark:bg-slate-800">
+              <motion.div key={index} variants={fadeInUp} className="relative">
+                {/* Animated gradient border */}
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 rounded-xl opacity-50 blur animate-pulse"></div>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl animate-spin" style={{ animationDuration: '4s' }}></div>
+                
+                <Card className="relative h-full hover:shadow-xl transition-all duration-300 border-0 bg-white dark:bg-slate-800 rounded-xl">
                   <CardContent className="p-8 text-center">
                     <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-2xl mb-6">
                       {feature.icon}
@@ -220,14 +318,14 @@ const Index = () => {
         </section>
 
         {/* What's Inside Section */}
-        <section className="container mx-auto px-4 py-20">
+        <section className="container mx-auto px-8 py-20">
           <motion.div 
             className="bg-white dark:bg-slate-800 rounded-3xl p-12 shadow-2xl"
             {...fadeInUp}
           >
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
-                <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-6">
+                <h2 className="text-4xl font-semibold text-slate-900 dark:text-white mb-6">
                   What's Inside the Cheatsheet?
                 </h2>
                 <div className="space-y-4">
@@ -258,7 +356,7 @@ const Index = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 rounded-2xl blur-2xl opacity-20"></div>
                 <div className="relative bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-800 rounded-2xl p-8 text-center">
                   <BookOpen className="h-16 w-16 text-blue-600 dark:text-blue-400 mx-auto mb-4" />
-                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">20+ Pages</h3>
+                  <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-2">20+ Pages</h3>
                   <p className="text-slate-600 dark:text-slate-300">of curated content</p>
                 </div>
               </div>
@@ -267,12 +365,12 @@ const Index = () => {
         </section>
 
         {/* Testimonial Section */}
-        <section className="container mx-auto px-4 py-20">
+        <section className="container mx-auto px-8 py-20">
           <motion.div 
             className="text-center mb-16"
             {...fadeInUp}
           >
-            <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">
+            <h2 className="text-4xl font-semibold text-slate-900 dark:text-white mb-4">
               Loved by Developers
             </h2>
           </motion.div>
@@ -330,12 +428,12 @@ const Index = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="container mx-auto px-4 py-20">
+        <section className="container mx-auto px-8 py-20">
           <motion.div 
             className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-12 text-center text-white"
             {...fadeInUp}
           >
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+            <h2 className="text-4xl lg:text-5xl font-semibold mb-6">
               Ready to Master Frontend Development?
             </h2>
             <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
@@ -359,13 +457,13 @@ const Index = () => {
         </section>
 
         {/* Email Signup Section */}
-        <section className="container mx-auto px-4 py-20">
+        <section className="container mx-auto px-8 py-20">
           <motion.div 
             className="bg-white dark:bg-slate-800 rounded-3xl p-12 text-center shadow-xl"
             {...fadeInUp}
           >
             <Mail className="h-12 w-12 text-blue-600 dark:text-blue-400 mx-auto mb-6" />
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">
+            <h2 className="text-3xl font-semibold text-slate-900 dark:text-white mb-4">
               Stay Updated
             </h2>
             <p className="text-xl text-slate-600 dark:text-slate-300 mb-8 max-w-2xl mx-auto">
@@ -388,7 +486,7 @@ const Index = () => {
         </section>
 
         {/* Footer */}
-        <footer className="container mx-auto px-4 py-12 text-center text-slate-600 dark:text-slate-400">
+        <footer className="container mx-auto px-8 py-12 text-center text-slate-600 dark:text-slate-400">
           <div className="flex items-center justify-center space-x-2 mb-4">
             <Code2 className="h-6 w-6 text-blue-600 dark:text-blue-400" />
             <span className="font-semibold">Frontend Mastery Cheatsheet</span>
