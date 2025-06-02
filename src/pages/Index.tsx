@@ -1,10 +1,11 @@
+
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Check, Code2, Zap, BookOpen, Star, Download, Mail, Moon, Sun, LogIn, UserPlus, Menu, X } from 'lucide-react';
+import { Check, Code2, Zap, BookOpen, Star, Download, Mail, Moon, Sun, LogIn, UserPlus, Menu, X, Twitter, Linkedin, Youtube, Facebook } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const Index = () => {
@@ -359,7 +360,7 @@ const Index = () => {
             className="text-center mb-16"
             {...fadeInUp}
           >
-            <h2 className="text-4xl font-semibold text-slate-900 dark:text-white mb-4">
+            <h2 className="text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 mb-4">
               Loved by Developers
             </h2>
           </motion.div>
@@ -375,40 +376,60 @@ const Index = () => {
                 name: "Sarah Chen",
                 role: "Frontend Developer",
                 content: "This cheatsheet saved me hours of googling. The code snippets are exactly what I needed for my daily work.",
-                rating: 5
+                rating: 5,
+                image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
               },
               {
                 name: "Mike Rodriguez",
                 role: "Web Developer",
                 content: "Perfect for quick reference! The Tailwind CSS section alone is worth the price. Highly recommended.",
-                rating: 5
+                rating: 5,
+                image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
               },
               {
                 name: "Emily Johnson",
                 role: "Junior Developer",
                 content: "As someone new to frontend development, this guide helped me understand best practices quickly.",
-                rating: 5
+                rating: 5,
+                image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
               }
             ].map((testimonial, index) => (
-              <motion.div key={index} variants={fadeInUp}>
-                <Card className="h-full bg-white dark:bg-slate-800 border-0 shadow-lg">
+              <motion.div key={index} variants={fadeInUp} className="relative">
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 rounded-2xl blur opacity-75"></div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl"></div>
+                
+                <Card className="relative h-full bg-white dark:bg-slate-800 border-0 shadow-lg rounded-2xl border-b-4 border-gradient-to-r from-blue-500 to-purple-500">
                   <CardContent className="p-8">
+                    <div className="flex items-center mb-6">
+                      <div className="relative">
+                        <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur opacity-75"></div>
+                        <img 
+                          src={testimonial.image}
+                          alt={testimonial.name}
+                          className="relative w-16 h-16 rounded-full object-cover border-2 border-white dark:border-slate-700"
+                        />
+                      </div>
+                      <div className="ml-4">
+                        <div className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                          {testimonial.name}
+                        </div>
+                        <div className="text-sm text-slate-500 dark:text-slate-400">
+                          {testimonial.role}
+                        </div>
+                      </div>
+                    </div>
+                    
                     <div className="flex mb-4">
                       {[...Array(testimonial.rating)].map((_, i) => (
                         <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
                       ))}
                     </div>
-                    <p className="text-slate-700 dark:text-slate-300 mb-6 italic">
+                    
+                    <p className="text-slate-700 dark:text-slate-300 italic">
                       "{testimonial.content}"
                     </p>
-                    <div>
-                      <div className="font-semibold text-slate-900 dark:text-white">
-                        {testimonial.name}
-                      </div>
-                      <div className="text-sm text-slate-500 dark:text-slate-400">
-                        {testimonial.role}
-                      </div>
-                    </div>
+                    
+                    <div className="mt-6 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full"></div>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -475,12 +496,102 @@ const Index = () => {
         </section>
 
         {/* Footer */}
-        <footer className="container mx-auto px-8 py-12 text-center text-slate-600 dark:text-slate-400">
-          <div className="flex items-center justify-center space-x-2 mb-4">
-            <Code2 className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-            <span className="font-semibold">Frontend Mastery Cheatsheet</span>
+        <footer className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white">
+          <div className="container mx-auto px-8 py-16">
+            <div className="grid md:grid-cols-4 gap-8">
+              {/* Brand Section */}
+              <div className="md:col-span-2">
+                <div className="flex items-center space-x-2 mb-6">
+                  <Code2 className="h-8 w-8 text-blue-400" />
+                  <span className="text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+                    Frontend Mastery
+                  </span>
+                </div>
+                <p className="text-slate-300 mb-6 leading-relaxed">
+                  Master frontend development with our comprehensive cheatsheet. 
+                  Join thousands of developers who have already leveled up their skills.
+                </p>
+                <div className="flex space-x-4">
+                  <a href="#" className="p-3 bg-slate-800 hover:bg-blue-600 rounded-lg transition-colors duration-300">
+                    <Twitter className="h-5 w-5" />
+                  </a>
+                  <a href="#" className="p-3 bg-slate-800 hover:bg-blue-600 rounded-lg transition-colors duration-300">
+                    <Linkedin className="h-5 w-5" />
+                  </a>
+                  <a href="#" className="p-3 bg-slate-800 hover:bg-red-600 rounded-lg transition-colors duration-300">
+                    <Youtube className="h-5 w-5" />
+                  </a>
+                  <a href="#" className="p-3 bg-slate-800 hover:bg-blue-800 rounded-lg transition-colors duration-300">
+                    <Facebook className="h-5 w-5" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Quick Links */}
+              <div>
+                <h3 className="text-lg font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 mb-6">
+                  Quick Links
+                </h3>
+                <ul className="space-y-3">
+                  {components.map((component) => (
+                    <li key={component.name}>
+                      <a
+                        href={component.href}
+                        className="text-slate-300 hover:text-blue-400 transition-colors duration-200"
+                      >
+                        {component.name}
+                      </a>
+                    </li>
+                  ))}
+                  <li>
+                    <a href="#testimonials" className="text-slate-300 hover:text-blue-400 transition-colors duration-200">
+                      Testimonials
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Support */}
+              <div>
+                <h3 className="text-lg font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 mb-6">
+                  Support
+                </h3>
+                <ul className="space-y-3">
+                  <li>
+                    <a href="#" className="text-slate-300 hover:text-purple-400 transition-colors duration-200">
+                      Help Center
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="text-slate-300 hover:text-purple-400 transition-colors duration-200">
+                      Contact Us
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="text-slate-300 hover:text-purple-400 transition-colors duration-200">
+                      Privacy Policy
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="text-slate-300 hover:text-purple-400 transition-colors duration-200">
+                      Terms of Service
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Bottom Section */}
+            <div className="border-t border-slate-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+              <p className="text-slate-400 text-sm">
+                &copy; 2024 Frontend Mastery. All rights reserved.
+              </p>
+              <div className="flex items-center space-x-6 mt-4 md:mt-0">
+                <span className="text-slate-400 text-sm">Made with ❤️ for developers</span>
+                <div className="h-1 w-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+              </div>
+            </div>
           </div>
-          <p>&copy; 2024 Frontend Mastery. All rights reserved.</p>
         </footer>
       </div>
     </div>
